@@ -214,3 +214,66 @@ console.log(new BreakoutRoom());
    class (2 instances) -> Player
    class Little Circles
 */
+
+const potatoSkins = [
+  "aleksandra",
+  "filipe",
+  "frankie",
+  "gizem",
+  "john",
+  "khrystyna",
+  "tadej",
+  "tom",
+  "ola",
+  "brittney",
+  "hugo",
+  "luca janssens",
+  "luca manzon",
+  "luis",
+  "nelli",
+  "andre",
+];
+
+class PotatoPlayer {
+  constructor(name) {
+    this.name = name;
+    this.money = 200;
+    this.position = 0;
+  }
+  move(max) {
+    const numberOfSteps = roleDice();
+    const newPosition = this.position + numberOfSteps;
+    if (newPosition > max) {
+      this.position = max - numberOfSteps;
+      this.money += 200;
+    } else {
+      this.position = newPosition;
+    }
+  }
+}
+
+class BoardGame {
+  constructor() {
+    this.tiles = 16;
+    this.players = potatoSkins.map(function (name) {
+      return new PotatoPlayer(name);
+    });
+  }
+  newRound() {
+    this.players.forEach((player) => {
+      player.move(this.tiles);
+    });
+  }
+}
+
+const monopoly = new BoardGame();
+console.log("monopoly:", monopoly);
+monopoly.newRound();
+monopoly.newRound();
+monopoly.newRound();
+monopoly.newRound();
+monopoly.newRound();
+monopoly.newRound();
+monopoly.newRound();
+monopoly.newRound();
+console.log("monopoly:", monopoly);
